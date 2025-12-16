@@ -24,8 +24,8 @@
 @font-face {
   font-family: "Suisse Intl";
   src:
-    url("/fonts/SuisseIntl-SemiBold.woff2") format("woff2"),
-    url("/fonts/SuisseIntl-SemiBold.woff") format("woff");
+    url("/fonts/SuisseIntl-Semibold.woff2") format("woff2"),
+    url("/fonts/SuisseIntl-Semibold.woff") format("woff");
   font-style: normal;
   font-weight: 600;
   font-display: swap;
