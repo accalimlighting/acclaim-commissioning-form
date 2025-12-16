@@ -46,6 +46,9 @@
 @theme inline {
   --color-background: var(--surface);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--foreground);
+  --color-surface-muted: var(--surface-muted);
   --font-sans: "Suisse Intl", "Inter", system-ui, -apple-system, sans-serif;
 }
 
@@ -79,6 +82,14 @@ body {
   }
 
   .pill {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-100;
+    @apply inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium;
+  }
+
+  .pill-default {
+    @apply border-white/10 bg-white/5 text-slate-100;
+  }
+
+  .pill-emerald {
+    @apply border-emerald-500/30 bg-emerald-500/10 text-emerald-100;
   }
 }

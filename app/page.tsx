@@ -1,3 +1,4 @@
+/* Restores the commissioning form UI and fixes pill overrides and footer contrast. */
 "use client";
 
 import { useMemo, useState } from "react";
@@ -127,8 +128,8 @@ export default function Home() {
               />
             </div>
             <div className="hidden md:flex gap-2">
-              <span className="pill">White Light Linear</span>
-              <span className="pill">Commissioning</span>
+              <span className="pill pill-default">White Light Linear</span>
+              <span className="pill pill-default">Commissioning</span>
             </div>
           </div>
           <div className="flex flex-col items-start gap-2 text-sm text-slate-200 md:items-end">
@@ -184,9 +185,7 @@ export default function Home() {
                     Based on the attached commissioning form.
                   </p>
                 </div>
-                <span className="pill bg-emerald-500/10 text-emerald-100 border-emerald-500/30">
-                  Required fields noted
-                </span>
+                <span className="pill pill-emerald">Required fields noted</span>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <Field
@@ -423,7 +422,7 @@ export default function Home() {
               />
             </section>
 
-            <div className="flex flex-col gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="text-sm text-slate-300">
                 Submissions are stored in Google Sheets. For urgent support call
                 323-213-4594.
@@ -494,3 +493,4 @@ function Banner({ kind, message }: BannerProps) {
     </div>
   );
 }
+ 
