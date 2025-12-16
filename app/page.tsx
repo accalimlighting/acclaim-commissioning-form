@@ -384,7 +384,7 @@ function Hero() {
         <div className="flex items-start justify-between gap-6">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <div className="relative h-[3.75rem] w-[15rem]">
+              <div className="relative h-[3.2rem] w-[12.8rem]">
                 <Image
                   src="/Acclaim_Horizontal_Logo_Dark.svg"
                   alt="Acclaim Lighting"
