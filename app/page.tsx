@@ -375,21 +375,21 @@ function Hero() {
           alt="Gradient backdrop"
           fill
           priority
-          className="object-cover"
+          className="object-cover object-top"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/35 via-slate-900/32 to-slate-950/40" />
       </div>
 
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-16 md:py-24">
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-20 md:py-32">
         <div className="flex items-start justify-between gap-6">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <div className="relative h-12 w-40">
+              <div className="relative h-[3.75rem] w-[15rem]">
                 <Image
                   src="/Acclaim_Horizontal_Logo_Dark.svg"
                   alt="Acclaim Lighting"
                   fill
-                  className="object-contain"
+                  className="object-contain object-center"
                   priority
                 />
               </div>
