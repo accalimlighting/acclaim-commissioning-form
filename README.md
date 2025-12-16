@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Acclaim Commissioning Form
 
-## Getting Started
+Next.js app (app router + Tailwind) that renders the commissioning form and appends submissions to Google Sheets via a service account. Optimized for Vercel deployment.
 
-First, run the development server:
+## Prerequisites
+- Node 18+ (matches Vercel runtime)
+- Google Cloud project with Sheets API enabled
+- A Google Sheet to store responses
 
+## Environment variables
+Create `.env.local` (or set in Vercel project settings):
+```
+GOOGLE_SERVICE_ACCOUNT_EMAIL=service-account@project.iam.gserviceaccount.com
+GOOGLE_SERVICE_ACCOUNT_KEY="-----BEGIN PRIVATE KEY-----\nPASTE_KEY\n-----END PRIVATE KEY-----\n"
+GOOGLE_SHEETS_ID=your-google-sheet-id
+```
+Notes:
+- Preserve newline escapes (`\n`) in the private key when pasting into env vars.
+- Share the target Sheet with the service account email with Editor access.
+- The API writes to `Sheet1!A1`; rename `Sheet1` if you prefer but keep the range in `app/api/submit/route.ts` in sync.
+
+## Local development
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# visit http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploy to Vercel
+1. Push the repo or import into Vercel.
+2. Add the three environment variables above in Vercel Project Settings → Environment Variables.
+3. Deploy. Vercel will host the static form and the API route that writes to Sheets.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Data captured (column order)
+1. Timestamp (ISO)
+2. Job name
+3. Site address
+4. Field contact name
+5. Field contact email
+6. Field contact phone
+7. Drawing link
+8. Programming narrative
+9. Fixtures operable (Yes/No)
+10. Wiring/DMX notes
+11. DMX access available (Yes/No)
+12. Additional notes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Form fields (mapped to the PDF)
+- Job name; site address/location
+- Field contact: name, email, phone
+- Drawing link (sheet with fixture types / layout / control zones)
+- Programming narrative (scenes, priorities: daily, holidays, sports, etc.)
+- Fixtures correctly wired/operable (radio) + wiring/DMX test notes
+- DMX controls/splitters access confirmation (checkbox)
+- Additional notes for scheduling/coordination
