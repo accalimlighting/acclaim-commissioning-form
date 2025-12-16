@@ -377,16 +377,16 @@ function Hero() {
           priority
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/70 via-slate-900/65 to-slate-950/80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/35 via-slate-900/32 to-slate-950/40" />
       </div>
 
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-12 md:py-16">
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-16 md:py-24">
         <div className="flex items-start justify-between gap-6">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
               <div className="relative h-12 w-40">
                 <Image
-                  src="/Acclaim_Horizontal_Logo_Light.svg"
+                  src="/Acclaim_Horizontal_Logo_Dark.svg"
                   alt="Acclaim Lighting"
                   fill
                   className="object-contain"
@@ -395,24 +395,20 @@ function Hero() {
               </div>
             </div>
             <div className="space-y-3">
-              <h1 className="text-3xl font-semibold leading-tight text-white md:text-4xl">
-                Linear White Light Guide
+              <h1 className="text-3xl font-bold leading-tight text-white md:text-4xl">
+                Commissioning Intake Form
               </h1>
               <p className="max-w-3xl text-base text-slate-100 md:text-lg">
-                A quick reference companion for Acclaim&apos;s white light linear
-                products and associated accessories.
+                Submit information for planning and commissioning on your Acclaim project.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <button className="pill pill-default px-4 py-2 text-sm font-semibold text-white/90">
-                Guide focus: White Light Linear Portfolio
-              </button>
-              <button className="pill pill-default px-4 py-2 text-sm font-semibold text-white/90">
-                Pricing format: USA Distributor Net (DN)
-              </button>
-              <button className="pill pill-default px-4 py-2 text-sm font-semibold text-white/90">
-                For official quotations: quotes@acclaimlighting.com
-              </button>
+              <a
+                className="pill pill-default px-4 py-2 text-sm font-semibold text-white/90 hover:text-white"
+                href="mailto:support@acclaimlighting.com"
+              >
+                For additional support, please contact support@acclaimlighting.com
+              </a>
             </div>
           </div>
         </div>
