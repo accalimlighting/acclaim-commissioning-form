@@ -1,32 +1,84 @@
 @import "tailwindcss";
 
+/* Suisse International – drop your .woff2 files into public/fonts */
+@font-face {
+  font-family: "Suisse Intl";
+  src:
+    url("/fonts/SuisseIntl-Regular.woff2") format("woff2"),
+    url("/fonts/SuisseIntl-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl";
+  src:
+    url("/fonts/SuisseIntl-Medium.woff2") format("woff2"),
+    url("/fonts/SuisseIntl-Medium.woff") format("woff");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl";
+  src:
+    url("/fonts/SuisseIntl-SemiBold.woff2") format("woff2"),
+    url("/fonts/SuisseIntl-SemiBold.woff") format("woff");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f172a;
+  --foreground: #e6eef7;
+  --surface: #0c1220;
+  --surface-muted: #111827;
+  --card: #0f1628;
+  --card-border: #1f2a44;
+  --accent: #ef4643;
+  --accent-strong: #f26c62;
+  --glow: 0 25px 60px rgba(19, 36, 64, 0.35);
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-background: var(--surface);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: "Suisse Intl", "Inter", system-ui, -apple-system, sans-serif;
 }
 
 body {
-  background: var(--background);
+  background: radial-gradient(circle at 20% 20%, #1e2c4f, #0c1220 50%),
+    radial-gradient(circle at 80% 0%, #472a44, #0c1220 40%),
+    linear-gradient(135deg, #0f172a, #0c1220);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Suisse Intl", "Inter", system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+.glass {
+  background: rgba(20, 28, 48, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: var(--glow);
+  backdrop-filter: blur(8px);
+}
+
+.chip {
+  @apply rounded-full border border-slate-700/60 bg-slate-800/50 px-3 py-1 text-xs font-medium text-slate-200 transition hover:border-slate-500;
 }
 
 @layer components {
   .input {
-    @apply w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-100;
+    @apply w-full rounded-xl border border-slate-800 bg-slate-900/70 px-3 py-3 text-sm text-slate-100 shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-600/50;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-gradient-to-r from-rose-500 to-amber-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-rose-900/30 transition hover:brightness-105 disabled:opacity-60;
+  }
+
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-100;
   }
 }

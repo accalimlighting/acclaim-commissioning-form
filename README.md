@@ -18,6 +18,7 @@ Notes:
 - Preserve newline escapes (`\n`) in the private key when pasting into env vars.
 - Share the target Sheet with the service account email with Editor access.
 - The API writes to `Sheet1!A1`; rename `Sheet1` if you prefer but keep the range in `app/api/submit/route.ts` in sync.
+- Suisse Intl fonts: drop `SuisseIntl-Regular/Medium/SemiBold` `.woff2` (or `.woff`) into `public/fonts/`. The CSS already references these names; if you cannot commit the files, keep them local or upload to your host as static assets.
 
 ## Local development
 ```bash

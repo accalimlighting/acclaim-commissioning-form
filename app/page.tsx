@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 
 type FormState = {
   jobName: string;
@@ -112,32 +113,80 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="border-b border-slate-200 bg-white/80 backdrop-blur">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
-          <div>
-            <p className="text-sm font-medium text-slate-500">Acclaim</p>
-            <h1 className="text-xl font-semibold text-slate-900">
-              Commissioning Form
-            </h1>
+    <div className="min-h-screen">
+      <div className="border-b border-white/10 bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950 text-slate-100">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-8 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-3">
+            <div className="h-11 w-40 relative">
+              <Image
+                src="/Acclaim_Horizontal_Logo_Dark.svg"
+                alt="Acclaim Lighting"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div className="hidden md:flex gap-2">
+              <span className="pill">White Light Linear</span>
+              <span className="pill">Commissioning</span>
+            </div>
           </div>
-          <div className="hidden text-sm text-slate-500 sm:block">
-            Public submission · Stored to Google Sheets
+          <div className="flex flex-col items-start gap-2 text-sm text-slate-200 md:items-end">
+            <span className="text-xs uppercase tracking-[0.2em] text-slate-400">
+              For official quotations
+            </span>
+            <a
+              className="font-semibold text-slate-100 hover:text-white"
+              href="mailto:quotes@acclaimlighting.com"
+            >
+              quotes@acclaimlighting.com
+            </a>
           </div>
         </div>
-      </header>
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 pb-10">
+          <div className="glass rounded-2xl border border-white/10 p-6">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div className="space-y-2">
+                <p className="text-xs uppercase tracking-[0.35em] text-slate-400">
+                  Commissioning Intake
+                </p>
+                <h1 className="text-2xl font-semibold text-white md:text-3xl">
+                  Linear White Light Guide – Commissioning Form
+                </h1>
+                <p className="max-w-3xl text-sm text-slate-200">
+                  Capture project details, wiring readiness, and scene priorities
+                  so field programming can move fast.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <span className="chip">Public submission</span>
+                <span className="chip">Sheets storage</span>
+                <span className="chip">DMX readiness</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <main className="mx-auto max-w-4xl px-6 py-10">
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <main className="mx-auto max-w-6xl px-6 py-10">
+        <div className="glass rounded-2xl border border-white/10 p-8 shadow-xl">
           <form className="space-y-8" onSubmit={handleSubmit}>
             <section className="space-y-4">
-              <div>
-                <h2 className="text-lg font-semibold text-slate-900">
-                  Project details
-                </h2>
-                <p className="text-sm text-slate-600">
-                  Based on the attached commissioning form.
-                </p>
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
+                    Project details
+                  </p>
+                  <h2 className="text-xl font-semibold text-white">
+                    Key project information
+                  </h2>
+                  <p className="text-sm text-slate-300">
+                    Based on the attached commissioning form.
+                  </p>
+                </div>
+                <span className="pill bg-emerald-500/10 text-emerald-100 border-emerald-500/30">
+                  Required fields noted
+                </span>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <Field
@@ -150,6 +199,7 @@ export default function Home() {
                       className="input"
                       value={form.jobName}
                       onChange={(e) => handleChange("jobName", e.target.value)}
+                      placeholder="e.g., Riverfront Plaza"
                     />
                   }
                 />
@@ -165,6 +215,7 @@ export default function Home() {
                       onChange={(e) =>
                         handleChange("siteAddress", e.target.value)
                       }
+                      placeholder="Street, city, state"
                     />
                   }
                 />
@@ -182,6 +233,7 @@ export default function Home() {
                       onChange={(e) =>
                         handleChange("contactName", e.target.value)
                       }
+                      placeholder="Full name"
                     />
                   }
                 />
@@ -197,6 +249,7 @@ export default function Home() {
                       onChange={(e) =>
                         handleChange("contactEmail", e.target.value)
                       }
+                      placeholder="name@company.com"
                     />
                   }
                 />
@@ -212,6 +265,7 @@ export default function Home() {
                       onChange={(e) =>
                         handleChange("contactPhone", e.target.value)
                       }
+                      placeholder="+1 (555) 123-4567"
                     />
                   }
                 />
@@ -219,12 +273,15 @@ export default function Home() {
             </section>
 
             <section className="space-y-4">
-              <div className="flex items-start justify-between gap-2">
+              <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h2 className="text-lg font-semibold text-slate-900">
-                    Documents and narrative
-                  </h2>
-                  <p className="text-sm text-slate-600">
+                  <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
+                    Documents & narrative
+                  </p>
+                  <h2 className="text-xl font-semibold text-white">
+                    Visual intent & control sheets
+                </h2>
+                  <p className="text-sm text-slate-300">
                     Provide drawings and desired scenes.
                   </p>
                 </div>
@@ -255,6 +312,7 @@ export default function Home() {
                       onChange={(e) =>
                         handleChange("programmingNarrative", e.target.value)
                       }
+                      placeholder="List scenes in priority order"
                     />
                   }
                 />
@@ -263,10 +321,13 @@ export default function Home() {
 
             <section className="space-y-4">
               <div>
-                <h2 className="text-lg font-semibold text-slate-900">
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
                   Hardware readiness
+                </p>
+                <h2 className="text-xl font-semibold text-white">
+                  Wiring & DMX access
                 </h2>
-                <p className="text-sm text-slate-600">
+                <p className="text-sm text-slate-300">
                   Confirm wiring/DMX and access to controls.
                 </p>
               </div>
@@ -280,7 +341,7 @@ export default function Home() {
                       {["yes", "no"].map((value) => (
                         <label
                           key={value}
-                          className="flex items-center gap-2 text-sm text-slate-700"
+                          className="flex items-center gap-2 text-sm text-slate-100"
                         >
                           <input
                             type="radio"
@@ -293,7 +354,7 @@ export default function Home() {
                                 value as FormState["fixturesOperable"]
                               )
                             }
-                            className="h-4 w-4 accent-slate-900"
+                            className="h-4 w-4 accent-rose-500"
                           />
                           {value === "yes" ? "Yes" : "No"}
                         </label>
@@ -311,6 +372,7 @@ export default function Home() {
                       onChange={(e) =>
                         handleChange("wiringNotes", e.target.value)
                       }
+                      placeholder="Document any gaps or observations"
                     />
                   }
                 />
@@ -319,10 +381,10 @@ export default function Home() {
                 <Field
                   label="Access for DMX controls and splitters will be available to field techs"
                   input={
-                    <label className="flex items-center gap-3 text-sm text-slate-700">
+                    <label className="flex items-center gap-3 text-sm text-slate-100">
                       <input
                         type="checkbox"
-                        className="h-4 w-4 accent-slate-900"
+                        className="h-4 w-4 accent-rose-500"
                         checked={form.dmxAccessAvailable}
                         onChange={(e) =>
                           handleChange("dmxAccessAvailable", e.target.checked)
@@ -338,10 +400,11 @@ export default function Home() {
 
             <section className="space-y-4">
               <div>
-                <h2 className="text-lg font-semibold text-slate-900">
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
                   Additional notes
-                </h2>
-                <p className="text-sm text-slate-600">
+                </p>
+                <h2 className="text-xl font-semibold text-white">Notes</h2>
+                <p className="text-sm text-slate-300">
                   Scheduling details or anything else the field team should know.
                 </p>
               </div>
@@ -354,20 +417,21 @@ export default function Home() {
                     onChange={(e) =>
                       handleChange("additionalNotes", e.target.value)
                     }
+                    placeholder="Add any clarifications for the programming team"
                   />
                 }
               />
             </section>
 
             <div className="flex flex-col gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-sm text-slate-600">
+              <div className="text-sm text-slate-300">
                 Submissions are stored in Google Sheets. For urgent support call
                 323-213-4594.
               </div>
               <button
                 type="submit"
                 disabled={status.state === "submitting"}
-                className="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800 disabled:opacity-60"
+                className="btn-primary"
               >
                 {status.state === "submitting" ? "Submitting..." : "Submit form"}
               </button>
@@ -397,19 +461,19 @@ type FieldProps = {
 function Field({ label, input, helper, required, error }: FieldProps) {
   return (
     <div className="space-y-1.5">
-      <div className="flex items-center gap-2 text-sm font-medium text-slate-800">
+      <div className="flex items-center gap-2 text-sm font-semibold text-slate-100">
         <span>{label}</span>
         {required ? (
-          <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-amber-800">
+          <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-amber-100">
             Required
           </span>
         ) : null}
       </div>
       {input}
       {helper ? (
-        <p className="text-xs text-slate-600 leading-4">{helper}</p>
+        <p className="text-xs leading-4 text-slate-300">{helper}</p>
       ) : null}
-      {error ? <p className="text-xs text-red-600">{error}</p> : null}
+      {error ? <p className="text-xs text-rose-400">{error}</p> : null}
     </div>
   );
 }
@@ -422,8 +486,8 @@ type BannerProps = {
 function Banner({ kind, message }: BannerProps) {
   const styles =
     kind === "success"
-      ? "bg-emerald-50 text-emerald-900 border-emerald-200"
-      : "bg-rose-50 text-rose-900 border-rose-200";
+      ? "bg-emerald-500/10 text-emerald-100 border-emerald-500/40"
+      : "bg-rose-500/10 text-rose-100 border-rose-500/40";
   return (
     <div className={`rounded-xl border px-4 py-3 text-sm ${styles}`}>
       {message}
