@@ -1,8 +1,7 @@
-/* Restores the commissioning form UI and fixes pill overrides and footer contrast. */
 "use client";
 
-import { useMemo, useState } from "react";
 import Image from "next/image";
+import { useMemo, useState } from "react";
 
 type FormState = {
   jobName: string;
@@ -115,78 +114,17 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      <div className="border-b border-white/10 bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950 text-slate-100">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-8 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-3">
-            <div className="h-11 w-40 relative">
-              <Image
-                src="/Acclaim_Horizontal_Logo_Dark.svg"
-                alt="Acclaim Lighting"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-            <div className="hidden md:flex gap-2">
-              <span className="pill pill-default">White Light Linear</span>
-              <span className="pill pill-default">Commissioning</span>
-            </div>
-          </div>
-          <div className="flex flex-col items-start gap-2 text-sm text-slate-200 md:items-end">
-            <span className="text-xs uppercase tracking-[0.2em] text-slate-400">
-              For official quotations
-            </span>
-            <a
-              className="font-semibold text-slate-100 hover:text-white"
-              href="mailto:quotes@acclaimlighting.com"
-            >
-              quotes@acclaimlighting.com
-            </a>
-          </div>
-        </div>
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 pb-10">
-          <div className="glass rounded-2xl border border-white/10 p-6">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div className="space-y-2">
-                <p className="text-xs uppercase tracking-[0.35em] text-slate-400">
-                  Commissioning Intake
-                </p>
-                <h1 className="text-2xl font-semibold text-white md:text-3xl">
-                  Linear White Light Guide – Commissioning Form
-                </h1>
-                <p className="max-w-3xl text-sm text-slate-200">
-                  Capture project details, wiring readiness, and scene priorities
-                  so field programming can move fast.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <span className="chip">Public submission</span>
-                <span className="chip">Sheets storage</span>
-                <span className="chip">DMX readiness</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Hero />
 
-      <main className="mx-auto max-w-6xl px-6 py-10">
-        <div className="glass rounded-2xl border border-white/10 p-8 shadow-xl">
-          <form className="space-y-8" onSubmit={handleSubmit}>
-            <section className="space-y-4">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-                    Project details
-                  </p>
-                  <h2 className="text-xl font-semibold text-white">
-                    Key project information
-                  </h2>
-                  <p className="text-sm text-slate-300">
-                    Based on the attached commissioning form.
-                  </p>
-                </div>
-                <span className="pill pill-emerald">Required fields noted</span>
-              </div>
+      <main className="mx-auto max-w-6xl px-6 py-12">
+        <div className="glass rounded-3xl border border-white/10 p-8 shadow-xl shadow-black/30">
+          <form className="space-y-10" onSubmit={handleSubmit}>
+            <Section
+              kicker="Project details"
+              title="Key project information"
+              description="Based on the attached commissioning form."
+              badge="Required fields noted"
+            >
               <div className="grid gap-4 md:grid-cols-2">
                 <Field
                   label="Job name"
@@ -269,22 +207,13 @@ export default function Home() {
                   }
                 />
               </div>
-            </section>
+            </Section>
 
-            <section className="space-y-4">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-                    Documents & narrative
-                  </p>
-                  <h2 className="text-xl font-semibold text-white">
-                    Visual intent & control sheets
-                </h2>
-                  <p className="text-sm text-slate-300">
-                    Provide drawings and desired scenes.
-                  </p>
-                </div>
-              </div>
+            <Section
+              kicker="Documents & narrative"
+              title="Visual intent & control sheets"
+              description="Provide drawings and desired scenes."
+            >
               <div className="grid gap-4 md:grid-cols-2">
                 <Field
                   label="Drawing link (Drive, SharePoint, etc.)"
@@ -306,7 +235,7 @@ export default function Home() {
                   helper="Scenes or visual priorities (daily, holidays, sports, etc.)."
                   input={
                     <textarea
-                      className="input min-h-24 resize-none"
+                      className="input min-h-28 resize-none"
                       value={form.programmingNarrative}
                       onChange={(e) =>
                         handleChange("programmingNarrative", e.target.value)
@@ -316,20 +245,13 @@ export default function Home() {
                   }
                 />
               </div>
-            </section>
+            </Section>
 
-            <section className="space-y-4">
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-                  Hardware readiness
-                </p>
-                <h2 className="text-xl font-semibold text-white">
-                  Wiring & DMX access
-                </h2>
-                <p className="text-sm text-slate-300">
-                  Confirm wiring/DMX and access to controls.
-                </p>
-              </div>
+            <Section
+              kicker="Hardware readiness"
+              title="Wiring & DMX access"
+              description="Confirm wiring/DMX and access to controls."
+            >
               <div className="grid gap-4 md:grid-cols-2">
                 <Field
                   label="Are all fixtures correctly wired and operable?"
@@ -366,7 +288,7 @@ export default function Home() {
                   helper="Include results (e.g., Art500/Pharos reaction, handheld DMX tests)."
                   input={
                     <textarea
-                      className="input min-h-20 resize-none"
+                      className="input min-h-24 resize-none"
                       value={form.wiringNotes}
                       onChange={(e) =>
                         handleChange("wiringNotes", e.target.value)
@@ -395,23 +317,18 @@ export default function Home() {
                   }
                 />
               </div>
-            </section>
+            </Section>
 
-            <section className="space-y-4">
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-                  Additional notes
-                </p>
-                <h2 className="text-xl font-semibold text-white">Notes</h2>
-                <p className="text-sm text-slate-300">
-                  Scheduling details or anything else the field team should know.
-                </p>
-              </div>
+            <Section
+              kicker="Additional notes"
+              title="Notes"
+              description="Scheduling details or anything else the field team should know."
+            >
               <Field
                 label="Notes"
                 input={
                   <textarea
-                    className="input min-h-24 resize-none"
+                    className="input min-h-28 resize-none"
                     value={form.additionalNotes}
                     onChange={(e) =>
                       handleChange("additionalNotes", e.target.value)
@@ -420,7 +337,7 @@ export default function Home() {
                   />
                 }
               />
-            </section>
+            </Section>
 
             <div className="flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="text-sm text-slate-300">
@@ -446,6 +363,89 @@ export default function Home() {
         </div>
       </main>
     </div>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="relative overflow-hidden">
+      <div className="absolute inset-0">
+        <Image
+          src="/Acclaim_Gradient_Pattern_00_Main.jpg"
+          alt="Gradient backdrop"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/70 via-slate-900/65 to-slate-950/80" />
+      </div>
+
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-12 md:py-16">
+        <div className="flex items-start justify-between gap-6">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="relative h-12 w-40">
+                <Image
+                  src="/Acclaim_Horizontal_Logo_Light.svg"
+                  alt="Acclaim Lighting"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
+            <div className="space-y-3">
+              <h1 className="text-3xl font-semibold leading-tight text-white md:text-4xl">
+                Linear White Light Guide
+              </h1>
+              <p className="max-w-3xl text-base text-slate-100 md:text-lg">
+                A quick reference companion for Acclaim&apos;s white light linear
+                products and associated accessories.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <button className="pill pill-default px-4 py-2 text-sm font-semibold text-white/90">
+                Guide focus: White Light Linear Portfolio
+              </button>
+              <button className="pill pill-default px-4 py-2 text-sm font-semibold text-white/90">
+                Pricing format: USA Distributor Net (DN)
+              </button>
+              <button className="pill pill-default px-4 py-2 text-sm font-semibold text-white/90">
+                For official quotations: quotes@acclaimlighting.com
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+type SectionProps = {
+  kicker: string;
+  title: string;
+  description: string;
+  badge?: string;
+  children: React.ReactNode;
+};
+
+function Section({ kicker, title, description, badge, children }: SectionProps) {
+  return (
+    <section className="space-y-5">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div className="space-y-2">
+          <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">
+            {kicker}
+          </p>
+          <h2 className="text-xl font-semibold text-white md:text-2xl">
+            {title}
+          </h2>
+          <p className="text-sm text-slate-300">{description}</p>
+        </div>
+        {badge ? <span className="pill pill-emerald">{badge}</span> : null}
+      </div>
+      {children}
+    </section>
   );
 }
 
