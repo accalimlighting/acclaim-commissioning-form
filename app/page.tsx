@@ -117,7 +117,7 @@ export default function Home() {
       <Hero />
 
       <main className="bg-[#E9EFF4] relative -mt-16 md:-mt-24 pb-16">
-        <div className="mx-auto max-w-6xl px-6 pt-12 md:pt-20">
+        <div className="mx-auto max-w-6xl px-6 pt-16 md:pt-24">
           <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-900/10">
           <form className="space-y-10" onSubmit={handleSubmit}>
             <Section
