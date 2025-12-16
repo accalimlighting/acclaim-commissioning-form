@@ -116,8 +116,9 @@ export default function Home() {
     <div className="min-h-screen">
       <Hero />
 
-      <main className="mx-auto max-w-6xl px-6 py-12">
-        <div className="glass rounded-3xl border border-white/10 p-8 shadow-xl shadow-black/30">
+      <main className="bg-[#E9EFF4]">
+        <div className="mx-auto max-w-6xl px-6 py-12">
+          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-900/10">
           <form className="space-y-10" onSubmit={handleSubmit}>
             <Section
               kicker="Project details"
@@ -339,8 +340,8 @@ export default function Home() {
               />
             </Section>
 
-            <div className="flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-sm text-slate-300">
+            <div className="flex flex-col gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="text-sm text-slate-700">
                 Submissions are stored in Google Sheets. For urgent support call
                 323-213-4594.
               </div>
@@ -430,13 +431,13 @@ function Section({ kicker, title, description, badge, children }: SectionProps) 
     <section className="space-y-5">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div className="space-y-2">
-          <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">
+          <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">
             {kicker}
           </p>
-          <h2 className="text-xl font-semibold text-white md:text-2xl">
+          <h2 className="text-xl font-semibold text-slate-900 md:text-2xl">
             {title}
           </h2>
-          <p className="text-sm text-slate-300">{description}</p>
+          <p className="text-sm text-slate-600">{description}</p>
         </div>
         {badge ? <span className="pill pill-emerald">{badge}</span> : null}
       </div>
@@ -456,17 +457,17 @@ type FieldProps = {
 function Field({ label, input, helper, required, error }: FieldProps) {
   return (
     <div className="space-y-1.5">
-      <div className="flex items-center gap-2 text-sm font-semibold text-slate-100">
+      <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
         <span>{label}</span>
         {required ? (
-          <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-amber-100">
+          <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-amber-800">
             Required
           </span>
         ) : null}
       </div>
       {input}
       {helper ? (
-        <p className="text-xs leading-4 text-slate-300">{helper}</p>
+        <p className="text-xs leading-4 text-slate-600">{helper}</p>
       ) : null}
       {error ? <p className="text-xs text-rose-400">{error}</p> : null}
     </div>
@@ -481,8 +482,8 @@ type BannerProps = {
 function Banner({ kind, message }: BannerProps) {
   const styles =
     kind === "success"
-      ? "bg-emerald-500/10 text-emerald-100 border-emerald-500/40"
-      : "bg-rose-500/10 text-rose-100 border-rose-500/40";
+      ? "bg-emerald-50 text-emerald-800 border-emerald-200"
+      : "bg-rose-50 text-rose-800 border-rose-200";
   return (
     <div className={`rounded-xl border px-4 py-3 text-sm ${styles}`}>
       {message}
