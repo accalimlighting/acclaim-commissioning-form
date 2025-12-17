@@ -397,7 +397,7 @@ function Hero() {
               </div>
             </div>
             <div className="space-y-3">
-              <h1 className="text-3xl font-bold leading-tight text-white md:text-4xl">
+              <h1 className="text-3xl font-suisse-bold leading-tight text-white md:text-4xl">
                 Commissioning Intake Form
               </h1>
               <p className="max-w-3xl text-base text-slate-100 md:text-lg">
