@@ -124,7 +124,6 @@ export default function Home() {
               kicker=""
               title="Project information"
               description="General project details and contacts"
-              badge="Required fields noted"
             >
               <div className="grid gap-4 md:grid-cols-2">
                 <Field
