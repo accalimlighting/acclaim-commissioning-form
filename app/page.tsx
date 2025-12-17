@@ -434,7 +434,7 @@ function Section({ kicker, title, description, badge, children }: SectionProps) 
           <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">
             {kicker}
           </p>
-          <h2 className="text-xl font-semibold text-slate-900 md:text-2xl">
+          <h2 className="text-xl font-semibold text-[#002A41] md:text-2xl">
             {title}
           </h2>
           <p className="text-sm text-slate-600">{description}</p>
