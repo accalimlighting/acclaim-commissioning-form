@@ -116,8 +116,8 @@ export default function Home() {
     <div className="min-h-screen">
       <Hero />
 
-      <main className="bg-[#E9EFF4] relative -mt-28 md:-mt-36 pb-16">
-        <div className="mx-auto max-w-6xl px-6 pt-14 md:pt-20">
+      <main className="bg-[#E9EFF4] relative -mt-16 md:-mt-24 pb-16">
+        <div className="mx-auto max-w-6xl px-6 pt-24 md:pt-32">
           <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-900/10">
           <form className="space-y-10" onSubmit={handleSubmit}>
             <Section
@@ -382,7 +382,7 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/35 via-slate-900/32 to-slate-950/40" />
       </div>
 
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-14 md:py-20">
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-20 md:py-28">
         <div className="flex items-start justify-between gap-6">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
