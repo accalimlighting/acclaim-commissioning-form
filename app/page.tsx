@@ -397,14 +397,14 @@ function Hero() {
               </div>
             </div>
             <div className="space-y-3">
-              <h1 className="text-3xl font-bold leading-tight text-white md:text-4xl">
+              <h1 className="text-3xl font-extrabold leading-tight text-white md:text-4xl">
                 Commissioning Intake Form
               </h1>
               <p className="max-w-3xl text-base text-slate-100 md:text-lg">
                 Submit information for planning and commissioning on your Acclaim project.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 pt-2 md:pt-3">
               <a
                 className="pill pill-default px-4 py-2 text-sm font-semibold text-white/90 hover:text-white"
                 href="mailto:support@acclaimlighting.com"
