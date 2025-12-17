@@ -404,7 +404,7 @@ function Hero() {
                 Submit information for planning and commissioning on your Acclaim project.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3 pt-2 md:pt-3">
+            <div className="flex flex-wrap gap-3 pt-4 md:pt-5">
               <a
                 className="pill pill-default px-4 py-2 text-sm font-semibold text-white/90 hover:text-white"
                 href="mailto:support@acclaimlighting.com"
