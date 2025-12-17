@@ -121,9 +121,9 @@ export default function Home() {
           <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-900/10">
           <form className="space-y-10" onSubmit={handleSubmit}>
             <Section
-              kicker="Project details"
-              title="Key project information"
-              description="Based on the attached commissioning form."
+              kicker=""
+              title="Project information"
+              description="General project details and contacts"
               badge="Required fields noted"
             >
               <div className="grid gap-4 md:grid-cols-2">
