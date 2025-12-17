@@ -382,7 +382,7 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/35 via-slate-900/32 to-slate-950/40" />
       </div>
 
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-20 md:py-28">
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 pt-12 pb-24 md:pt-16 md:pb-32">
         <div className="flex items-start justify-between gap-6">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
