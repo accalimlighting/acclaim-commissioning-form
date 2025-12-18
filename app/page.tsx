@@ -329,7 +329,7 @@ export default function Home() {
             </Section>
 
             <Section
-              kicker="Hardware readiness"
+              kicker=""
               title="Wiring & DMX access"
               description="Confirm wiring/DMX and access to controls."
             >
@@ -343,7 +343,7 @@ export default function Home() {
                       {["yes", "no"].map((value) => (
                         <label
                           key={value}
-                          className="flex items-center gap-2 text-sm text-slate-100"
+                          className="flex items-center gap-2 text-sm text-slate-800"
                         >
                           <input
                             type="radio"
@@ -365,6 +365,31 @@ export default function Home() {
                   }
                 />
                 <Field
+                  label="Access for DMX controls and splitters will be available to field techs"
+                  input={
+                    <div className="flex gap-4">
+                      {[true, false].map((value) => (
+                        <label
+                          key={String(value)}
+                          className="flex items-center gap-2 text-sm text-slate-800"
+                        >
+                          <input
+                            type="radio"
+                            name="dmxAccessAvailable"
+                            value={String(value)}
+                            checked={form.dmxAccessAvailable === value}
+                            onChange={() => handleChange("dmxAccessAvailable", value)}
+                            className="h-4 w-4 accent-rose-500"
+                          />
+                          {value ? "Yes" : "No"}
+                        </label>
+                      ))}
+                    </div>
+                  }
+                />
+              </div>
+              <div className="grid gap-4">
+                <Field
                   label="Notes on wiring/DMX testing"
                   helper="Include results (e.g., Art500/Pharos reaction, handheld DMX tests)."
                   input={
@@ -376,25 +401,6 @@ export default function Home() {
                       }
                       placeholder="Document any gaps or observations"
                     />
-                  }
-                />
-              </div>
-              <div className="grid gap-4">
-                <Field
-                  label="Access for DMX controls and splitters will be available to field techs"
-                  input={
-                    <label className="flex items-center gap-3 text-sm text-slate-100">
-                      <input
-                        type="checkbox"
-                        className="h-4 w-4 accent-rose-500"
-                        checked={form.dmxAccessAvailable}
-                        onChange={(e) =>
-                          handleChange("dmxAccessAvailable", e.target.checked)
-                        }
-                      />
-                      Confirm access to DMX controls, splitters, and start
-                      cables/drivers.
-                    </label>
                   }
                 />
               </div>
