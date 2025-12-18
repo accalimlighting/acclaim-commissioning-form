@@ -5,6 +5,11 @@ import { useMemo, useState } from "react";
 
 type FormState = {
   jobName: string;
+  addressLine1: string;
+  addressLine2: string;
+  city: string;
+  state: string;
+  postalCode: string;
   siteAddress: string;
   contactName: string;
   contactEmail: string;
@@ -25,6 +30,11 @@ type Status =
 
 const initialState: FormState = {
   jobName: "",
+  addressLine1: "",
+  addressLine2: "",
+  city: "",
+  state: "",
+  postalCode: "",
   siteAddress: "",
   contactName: "",
   contactEmail: "",
@@ -45,7 +55,7 @@ export default function Home() {
   const requiredFields = useMemo(
     () => ({
       jobName: "Job name is required.",
-      siteAddress: "Site address is required.",
+      addressLine1: "Address line 1 is required.",
       contactName: "Field contact name is required.",
       contactEmail: "Field contact email is required.",
       contactPhone: "Field contact phone is required.",
@@ -92,10 +102,20 @@ export default function Home() {
 
     setStatus({ state: "submitting" });
     try {
+      const combinedAddress = [
+        form.addressLine1,
+        form.addressLine2,
+        form.city,
+        form.state,
+        form.postalCode,
+      ]
+        .filter((part) => part && part.trim().length > 0)
+        .join(", ");
+
       const response = await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, siteAddress: combinedAddress }),
       });
 
       if (!response.ok) {
@@ -137,22 +157,87 @@ export default function Home() {
                       value={form.jobName}
                       onChange={(e) => handleChange("jobName", e.target.value)}
                       placeholder="e.g., Riverfront Plaza"
+                      autoComplete="organization"
                     />
                   }
                 />
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="md:col-span-2">
+                  <Field
+                    label="Address line 1"
+                    required
+                    error={errors.addressLine1}
+                    input={
+                      <input
+                        type="text"
+                        className="input"
+                        value={form.addressLine1}
+                        onChange={(e) => handleChange("addressLine1", e.target.value)}
+                        placeholder="Street address"
+                        name="address-line1"
+                        autoComplete="address-line1"
+                      />
+                    }
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <Field
+                    label="Address line 2"
+                    input={
+                      <input
+                        type="text"
+                        className="input"
+                        value={form.addressLine2}
+                        onChange={(e) => handleChange("addressLine2", e.target.value)}
+                        placeholder="Apartment, suite, unit (optional)"
+                        name="address-line2"
+                        autoComplete="address-line2"
+                      />
+                    }
+                  />
+                </div>
+              </div>
+              <div className="grid gap-4 md:grid-cols-3">
                 <Field
-                  label="Site address and location"
-                  required
-                  error={errors.siteAddress}
+                  label="City"
                   input={
                     <input
                       type="text"
                       className="input"
-                      value={form.siteAddress}
-                      onChange={(e) =>
-                        handleChange("siteAddress", e.target.value)
-                      }
-                      placeholder="Street, city, state"
+                      value={form.city}
+                      onChange={(e) => handleChange("city", e.target.value)}
+                      placeholder="City"
+                      name="address-level2"
+                      autoComplete="address-level2"
+                    />
+                  }
+                />
+                <Field
+                  label="State"
+                  input={
+                    <input
+                      type="text"
+                      className="input"
+                      value={form.state}
+                      onChange={(e) => handleChange("state", e.target.value)}
+                      placeholder="State"
+                      name="address-level1"
+                      autoComplete="address-level1"
+                    />
+                  }
+                />
+                <Field
+                  label="ZIP / Postal code"
+                  input={
+                    <input
+                      type="text"
+                      className="input"
+                      value={form.postalCode}
+                      onChange={(e) => handleChange("postalCode", e.target.value)}
+                      placeholder="ZIP / Postal"
+                      name="postal-code"
+                      autoComplete="postal-code"
                     />
                   }
                 />
