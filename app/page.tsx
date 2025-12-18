@@ -133,11 +133,11 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#E9EFF4]">
       <Hero />
 
-      <main className="bg-[#E9EFF4] relative -mt-12 md:-mt-16 pb-16">
-        <div className="mx-auto max-w-6xl px-6 pt-12 md:pt-16">
+      <main className="relative">
+        <div className="relative z-10 mx-auto max-w-6xl px-6 -mt-16 md:-mt-20">
           <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-900/10">
           <form className="space-y-10" onSubmit={handleSubmit}>
             <Section
@@ -443,6 +443,7 @@ export default function Home() {
           </form>
         </div>
         </div>
+        <div className="h-12 md:h-16" />
       </main>
     </div>
   );
@@ -450,7 +451,7 @@ export default function Home() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-visible">
       <div className="absolute inset-0">
         <Image
           src="/Acclaim_Gradient_Pattern_00_Main.jpg"
