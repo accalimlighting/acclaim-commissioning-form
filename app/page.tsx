@@ -144,11 +144,11 @@ export default function Home() {
               kicker=""
               title="Project information"
               description="General project details and contacts"
+              badge="All fields required"
             >
               <div className="grid gap-4 md:grid-cols-2">
                 <Field
                   label="Job name"
-                  required
                   error={errors.jobName}
                   input={
                     <input
@@ -166,7 +166,6 @@ export default function Home() {
                 <div className="md:col-span-2">
                   <Field
                     label="Address line 1"
-                    required
                     error={errors.addressLine1}
                     input={
                       <input
@@ -245,7 +244,6 @@ export default function Home() {
               <div className="grid gap-4 md:grid-cols-3">
                 <Field
                   label="Field contact name"
-                  required
                   error={errors.contactName}
                   input={
                     <input
@@ -261,7 +259,6 @@ export default function Home() {
                 />
                 <Field
                   label="Field contact email"
-                  required
                   error={errors.contactEmail}
                   input={
                     <input
@@ -277,7 +274,6 @@ export default function Home() {
                 />
                 <Field
                   label="Field contact phone"
-                  required
                   error={errors.contactPhone}
                   input={
                     <input
