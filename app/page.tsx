@@ -407,7 +407,7 @@ export default function Home() {
             </Section>
 
             <Section
-              kicker="Additional notes"
+              kicker=""
               title="Notes"
               description="Scheduling details or anything else the field team should know."
             >
@@ -428,8 +428,14 @@ export default function Home() {
 
             <div className="flex flex-col gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="text-sm text-slate-700">
-                Submissions are stored in Google Sheets. For urgent support call
-                323-213-4594.
+                <a
+                  className="text-slate-800 underline underline-offset-2 hover:text-slate-900"
+                  href="https://www.acclaimlighting.com"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  acclaimlighting.com
+                </a>
               </div>
               <button
                 type="submit"
