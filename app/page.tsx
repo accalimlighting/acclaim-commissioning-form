@@ -510,21 +510,21 @@ type SectionProps = {
 function Section({ kicker, title, description, badge, children }: SectionProps) {
   return (
     <section className="space-y-5">
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <div className="space-y-2">
-          <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">
-            {kicker}
-          </p>
+      <div className="flex flex-col gap-2">
+        <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">
+          {kicker}
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
           <h2 className="text-xl font-semibold text-[#002A41] md:text-2xl">
             {title}
           </h2>
-          <p className="text-sm text-slate-600">{description}</p>
+          {badge ? (
+            <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-800">
+              {badge}
+            </span>
+          ) : null}
         </div>
-        {badge ? (
-          <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-800">
-            {badge}
-          </span>
-        ) : null}
+        <p className="text-sm text-slate-600">{description}</p>
       </div>
       {children}
     </section>
