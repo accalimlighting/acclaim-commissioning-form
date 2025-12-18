@@ -520,7 +520,11 @@ function Section({ kicker, title, description, badge, children }: SectionProps) 
           </h2>
           <p className="text-sm text-slate-600">{description}</p>
         </div>
-        {badge ? <span className="pill pill-emerald">{badge}</span> : null}
+        {badge ? (
+          <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-800">
+            {badge}
+          </span>
+        ) : null}
       </div>
       {children}
     </section>
