@@ -440,7 +440,7 @@ export default function Home() {
               <button
                 type="submit"
                 disabled={status.state === "submitting"}
-                className="btn-primary"
+                className="btn-primary bg-[#005777] hover:bg-[#005777] border-none text-white"
               >
                 {status.state === "submitting" ? "Submitting..." : "Submit form"}
               </button>
