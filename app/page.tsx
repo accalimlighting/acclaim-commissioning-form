@@ -291,11 +291,11 @@ export default function Home() {
             </Section>
 
             <Section
-              kicker="Documents & narrative"
+              kicker=""
               title="Visual intent & control sheets"
               description="Provide drawings and desired scenes."
             >
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-4">
                 <Field
                   label="Drawing link (Drive, SharePoint, etc.)"
                   helper="Include sheet with fixture types, layout, control zones."
