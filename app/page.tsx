@@ -146,7 +146,7 @@ export default function Home() {
               description="General project details and contacts"
               badge="All fields required"
             >
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-4">
                 <Field
                   label="Job name"
                   error={errors.jobName}
@@ -333,7 +333,7 @@ export default function Home() {
               title="Wiring & DMX access"
               description="Confirm wiring/DMX and access to controls."
             >
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-4">
                 <Field
                   label="Are all fixtures correctly wired and operable?"
                   required
@@ -388,7 +388,7 @@ export default function Home() {
                   }
                 />
               </div>
-              <div className="grid gap-4">
+              <div className="space-y-4">
                 <Field
                   label="Notes on wiring/DMX testing"
                   helper="Include results (e.g., Art500/Pharos reaction, handheld DMX tests)."
