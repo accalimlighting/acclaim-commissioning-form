@@ -7,6 +7,9 @@ import {
 import { checkRateLimit } from "@/lib/rate-limit";
 import { getSheetsClient } from "@/lib/sheets-client";
 
+const CORS_METHODS = "POST, OPTIONS";
+const CORS_HEADERS = "Content-Type";
+
 type Payload = {
   jobName: string;
   siteAddress: string;
@@ -78,10 +81,74 @@ function getClientId(request: Request): string {
   return "unknown";
 }
 
+function getAllowedOrigins(): string[] {
+  const raw = process.env.FORM_CORS_ORIGINS ?? "https://commissioning.acclaim.guide";
+  return raw
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter((origin) => origin.length > 0);
+}
+
+function resolveCorsOrigin(request: Request): string | null {
+  const origin = request.headers.get("origin");
+  if (!origin) return null;
+  const allowedOrigins = getAllowedOrigins();
+  return allowedOrigins.includes(origin) ? origin : null;
+}
+
+function corsHeaders(origin: string | null): Headers {
+  const headers = new Headers({
+    "Access-Control-Allow-Methods": CORS_METHODS,
+    "Access-Control-Allow-Headers": CORS_HEADERS,
+    Vary: "Origin",
+  });
+  if (origin) {
+    headers.set("Access-Control-Allow-Origin", origin);
+  }
+  return headers;
+}
+
+function jsonWithCors(
+  request: Request,
+  body: unknown,
+  init?: ResponseInit
+): NextResponse {
+  const allowedOrigin = resolveCorsOrigin(request);
+  const response = NextResponse.json(body, init);
+  const headers = corsHeaders(allowedOrigin);
+  headers.forEach((value, key) => response.headers.set(key, value));
+  return response;
+}
+
+export async function OPTIONS(request: Request) {
+  const origin = request.headers.get("origin");
+  const allowedOrigin = resolveCorsOrigin(request);
+
+  if (origin && !allowedOrigin) {
+    return new NextResponse(null, { status: 403, headers: corsHeaders(null) });
+  }
+
+  return new NextResponse(null, { status: 204, headers: corsHeaders(allowedOrigin) });
+}
+
 export async function POST(request: Request) {
+  const origin = request.headers.get("origin");
+  const allowedOrigin = resolveCorsOrigin(request);
+  if (origin && !allowedOrigin) {
+    return jsonWithCors(
+      request,
+      {
+        error:
+          "Origin is not allowed. Add this storefront domain to FORM_CORS_ORIGINS.",
+      },
+      { status: 403 }
+    );
+  }
+
   const clientId = getClientId(request);
   if (!checkRateLimit(clientId)) {
-    return NextResponse.json(
+    return jsonWithCors(
+      request,
       { error: "Too many submissions. Try again later." },
       { status: 429 }
     );
@@ -129,7 +196,7 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json({ ok: true, submissionId });
+    return jsonWithCors(request, { ok: true, submissionId });
   } catch (error) {
     let message = error instanceof Error ? error.message : "Unknown error occurred";
 
@@ -143,6 +210,6 @@ export async function POST(request: Request) {
         'Google service account key is misformatted. Re-save GOOGLE_SERVICE_ACCOUNT_KEY as the full PEM key and preserve "\\n" line breaks.';
     }
 
-    return NextResponse.json({ error: message }, { status: 400 });
+    return jsonWithCors(request, { error: message }, { status: 400 });
   }
 }

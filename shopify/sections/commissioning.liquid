@@ -1,0 +1,196 @@
+{{ 'commissioning.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'commissioning.js' | asset_url }}" defer="defer"></script>
+
+<section class="acclaim-commissioning-wrap">
+  <div class="acclaim-commissioning-inner">
+    <form
+      class="acclaim-commissioning-form js-acclaim-commissioning-form"
+      data-endpoint="{{ section.settings.endpoint | escape }}"
+      novalidate
+    >
+      <div class="acclaim-form-section">
+        <h3 class="acclaim-section-title">Project information</h3>
+        <p class="acclaim-section-description">General project details and contacts</p>
+      </div>
+
+      <div class="acclaim-row">
+        <label class="acclaim-label" for="acclaim-job-name-{{ section.id }}">Job name</label>
+        <input
+          id="acclaim-job-name-{{ section.id }}"
+          class="acclaim-input"
+          name="jobName"
+          type="text"
+          placeholder="e.g., Riverfront Plaza"
+          required
+        >
+      </div>
+
+      <div class="acclaim-row">
+        <label class="acclaim-label" for="acclaim-po-{{ section.id }}">Purchase order</label>
+        <input
+          id="acclaim-po-{{ section.id }}"
+          class="acclaim-input"
+          name="purchaseOrder"
+          type="text"
+          placeholder="PO number (Client PO or Acclaim PO accepted)"
+          required
+        >
+      </div>
+
+      <div class="acclaim-row">
+        <label class="acclaim-label" for="acclaim-site-address-{{ section.id }}">Site address</label>
+        <textarea id="acclaim-site-address-{{ section.id }}" class="acclaim-input" name="siteAddress" rows="2" required></textarea>
+      </div>
+
+      <div class="acclaim-grid">
+        <div class="acclaim-row">
+          <label class="acclaim-label" for="acclaim-contact-name-{{ section.id }}">Field contact name</label>
+          <input
+            id="acclaim-contact-name-{{ section.id }}"
+            class="acclaim-input"
+            name="contactName"
+            type="text"
+            placeholder="Full name"
+            required
+          >
+        </div>
+        <div class="acclaim-row">
+          <label class="acclaim-label" for="acclaim-contact-email-{{ section.id }}">Field contact email</label>
+          <input
+            id="acclaim-contact-email-{{ section.id }}"
+            class="acclaim-input"
+            name="contactEmail"
+            type="email"
+            placeholder="name@company.com"
+            required
+          >
+        </div>
+        <div class="acclaim-row">
+          <label class="acclaim-label" for="acclaim-contact-phone-{{ section.id }}">Field contact phone</label>
+          <input
+            id="acclaim-contact-phone-{{ section.id }}"
+            class="acclaim-input"
+            name="contactPhone"
+            type="tel"
+            placeholder="+1 (555) 123-4567"
+            required
+          >
+        </div>
+      </div>
+
+      <div class="acclaim-divider"></div>
+      <div class="acclaim-form-section">
+        <h3 class="acclaim-section-title">Visual intent &amp; control sheets</h3>
+        <p class="acclaim-section-description">Provide drawings and desired scenes.</p>
+      </div>
+
+      <div class="acclaim-row">
+        <label class="acclaim-label" for="acclaim-drawing-link-{{ section.id }}">Drawing link</label>
+        <input
+          id="acclaim-drawing-link-{{ section.id }}"
+          class="acclaim-input"
+          name="drawingLink"
+          type="url"
+          placeholder="https://..."
+        >
+        <p class="acclaim-helper-text">
+          Include sheet with fixture types, layout, control zones. Contruction documents can also be emailed if preferred
+        </p>
+      </div>
+
+      <div class="acclaim-row">
+        <label class="acclaim-label" for="acclaim-programming-narrative-{{ section.id }}">Programming narrative</label>
+        <textarea
+          id="acclaim-programming-narrative-{{ section.id }}"
+          class="acclaim-input"
+          name="programmingNarrative"
+          rows="3"
+          placeholder="List scenes in priority order"
+        ></textarea>
+        <p class="acclaim-helper-text">Scenes or visual priorities (daily, holidays, sports, etc.).</p>
+      </div>
+
+      <div class="acclaim-divider"></div>
+      <div class="acclaim-form-section">
+        <h3 class="acclaim-section-title">Wiring &amp; DMX access</h3>
+        <p class="acclaim-section-description">Confirm wiring/DMX and access to controls.</p>
+      </div>
+
+      <fieldset class="acclaim-row">
+        <legend class="acclaim-label">Are all fixtures correctly wired and operable?</legend>
+        <div class="acclaim-options">
+          <label><input type="radio" name="fixturesOperable" value="yes" required> Yes</label>
+          <label><input type="radio" name="fixturesOperable" value="no" required> No</label>
+        </div>
+        <p class="acclaim-helper-text">
+          Contact Acclaim Support to resolve any issues at
+          <a href="tel:+13232134594">(323) 213-4594</a>
+          or
+          <a href="mailto:support@acclaimlighting.com">support@acclaimlighting.com</a>
+        </p>
+      </fieldset>
+
+      <fieldset class="acclaim-row">
+        <legend class="acclaim-label">DMX controls/splitters access available?</legend>
+        <div class="acclaim-options">
+          <label><input type="radio" name="dmxAccessAvailable" value="true"> Yes</label>
+          <label><input type="radio" name="dmxAccessAvailable" value="false"> No</label>
+        </div>
+      </fieldset>
+
+      <div class="acclaim-row">
+        <label class="acclaim-label" for="acclaim-wiring-notes-{{ section.id }}">Notes on wiring/DMX testing</label>
+        <textarea
+          id="acclaim-wiring-notes-{{ section.id }}"
+          class="acclaim-input"
+          name="wiringNotes"
+          rows="3"
+          placeholder="Document any gaps or observations"
+        ></textarea>
+        <p class="acclaim-helper-text">Include results (e.g., Art500/Pharos reaction, handheld DMX tests).</p>
+      </div>
+
+      <div class="acclaim-divider"></div>
+      <div class="acclaim-form-section">
+        <h3 class="acclaim-section-title">Notes</h3>
+        <p class="acclaim-section-description">Scheduling details or anything else the field team should know.</p>
+      </div>
+
+      <div class="acclaim-row">
+        <label class="acclaim-label" for="acclaim-additional-notes-{{ section.id }}">Additional notes</label>
+        <textarea
+          id="acclaim-additional-notes-{{ section.id }}"
+          class="acclaim-input"
+          name="additionalNotes"
+          rows="3"
+          placeholder="Add any clarifications for the programming team"
+        ></textarea>
+      </div>
+
+      <div class="acclaim-actions">
+        <button type="submit" class="acclaim-button">Submit form</button>
+      </div>
+
+      <p class="acclaim-message js-acclaim-message" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Commissioning form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "endpoint",
+      "label": "API endpoint",
+      "default": "https://commissioning.acclaim.guide/api/submit"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Commissioning form"
+    }
+  ]
+}
+{% endschema %}

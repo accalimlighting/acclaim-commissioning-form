@@ -1,0 +1,128 @@
+.acclaim-commissioning-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.acclaim-commissioning-inner {
+  border: 1px solid #d8dee8;
+  border-radius: 16px;
+  padding: 24px;
+  background: #ffffff;
+}
+
+.acclaim-commissioning-heading {
+  margin: 0 0 8px;
+}
+
+.acclaim-commissioning-description {
+  margin: 0 0 20px;
+  color: #556274;
+}
+
+.acclaim-commissioning-form {
+  display: grid;
+  gap: 14px;
+}
+
+.acclaim-form-section {
+  display: grid;
+  gap: 4px;
+}
+
+.acclaim-section-title {
+  margin: 0;
+  font-size: 1.45rem;
+  line-height: 1.25;
+}
+
+.acclaim-section-description {
+  margin: 0;
+  color: #556274;
+  font-size: 0.95rem;
+}
+
+.acclaim-divider {
+  border-top: 1px solid #d8dee8;
+  margin: 8px 0 2px;
+}
+
+.acclaim-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.acclaim-row {
+  display: grid;
+  gap: 6px;
+}
+
+.acclaim-label {
+  font-weight: 600;
+  font-size: 0.94rem;
+}
+
+.acclaim-input {
+  border: 1px solid #c9d1de;
+  border-radius: 8px;
+  padding: 10px 12px;
+  width: 100%;
+  font: inherit;
+}
+
+.acclaim-options {
+  display: flex;
+  gap: 16px;
+}
+
+.acclaim-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.acclaim-helper-text {
+  margin: 0;
+  color: #556274;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.acclaim-helper-text a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.acclaim-actions {
+  margin-top: 6px;
+}
+
+.acclaim-button {
+  border: none;
+  border-radius: 999px;
+  background: #005777;
+  color: #fff;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.acclaim-button[disabled] {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.acclaim-message {
+  margin: 4px 0 0;
+  font-size: 0.92rem;
+}
+
+.acclaim-message.is-success {
+  color: #116b37;
+}
+
+.acclaim-message.is-error {
+  color: #a0182f;
+}

@@ -17,12 +17,14 @@ GOOGLE_SHEETS_ID=your-google-sheet-id
 Optional (recommended in production):
 ```
 ADMIN_SECRET=your-secret-for-admin-api
+FORM_CORS_ORIGINS=https://commissioning.acclaim.guide,https://your-store.myshopify.com
 ```
 Notes:
 - Preserve newline escapes (`\n`) in the private key when pasting into env vars.
 - Share the target Sheet with the service account email with Editor access.
 - The API writes to `Sheet1!A1`; rename `Sheet1` if you prefer but keep the range in `app/api/submit/route.ts` in sync.
 - **Admin:** When `ADMIN_SECRET` is set, `GET /api/submissions` and `PATCH /api/submissions/[id]` require the header `x-admin-key: <ADMIN_SECRET>`. Use the admin UI at `/admin?key=<ADMIN_SECRET>` so the key is sent with each request.
+- **Shopify/native embeds:** `FORM_CORS_ORIGINS` controls which origins can call `POST /api/submit` from browser JavaScript.
 
 ## Local development
 ```bash
@@ -125,3 +127,34 @@ Row 1 must be headers. Data starts at row 2. The app expects **Sheet1** with the
 - Fixtures correctly wired/operable (radio) + wiring/DMX test notes
 - DMX controls/splitters access confirmation (checkbox)
 - Additional notes for scheduling/coordination
+
+## Shopify integration
+
+### Option 1: Iframe (fastest)
+
+Use this in a Shopify custom liquid section/page:
+
+```html
+<iframe
+  src="https://commissioning.acclaim.guide"
+  title="Commissioning Intake Form"
+  width="100%"
+  style="min-height: 1800px; border: 0;"
+  loading="lazy"
+></iframe>
+```
+
+### Option 2: Native Shopify section (recommended permanent path)
+
+This repo includes ready-to-copy theme files in `shopify/`:
+
+- `shopify/sections/commissioning.liquid`
+- `shopify/assets/commissioning.js`
+- `shopify/assets/commissioning.css`
+
+Setup:
+
+1. Copy those files into your Shopify theme (`sections/` and `assets/`).
+2. Add the "Commissioning form" section to the target page template in the Theme Editor.
+3. Set the section endpoint to `https://commissioning.acclaim.guide/api/submit`.
+4. In Vercel, set `FORM_CORS_ORIGINS` to include your storefront origin(s), then redeploy.
