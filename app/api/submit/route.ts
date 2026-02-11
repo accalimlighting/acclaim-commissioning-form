@@ -125,8 +125,18 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true, submissionId });
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Unknown error occurred";
+    let message = error instanceof Error ? error.message : "Unknown error occurred";
+
+    // Surface actionable guidance for common private key formatting issues.
+    if (
+      typeof message === "string" &&
+      (message.includes("DECODER routines::unsupported") ||
+        message.includes("error:1E08010C"))
+    ) {
+      message =
+        'Google service account key is misformatted. Re-save GOOGLE_SERVICE_ACCOUNT_KEY as the full PEM key and preserve "\\n" line breaks.';
+    }
+
     return NextResponse.json({ error: message }, { status: 400 });
   }
 }
