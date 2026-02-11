@@ -10,7 +10,7 @@ import { getSheetsClient } from "@/lib/sheets-client";
 type Payload = {
   jobName: string;
   siteAddress: string;
-  purchaseOrder?: string;
+  purchaseOrder: string;
   contactName: string;
   contactEmail: string;
   contactPhone: string;
@@ -27,6 +27,7 @@ function parsePayload(data: unknown): Payload {
   const requiredStrings: Array<keyof Payload> = [
     "jobName",
     "siteAddress",
+    "purchaseOrder",
     "contactName",
     "contactEmail",
     "contactPhone",
@@ -47,8 +48,7 @@ function parsePayload(data: unknown): Payload {
   return {
     jobName: body.jobName as string,
     siteAddress: body.siteAddress as string,
-    purchaseOrder:
-      typeof body.purchaseOrder === "string" ? body.purchaseOrder : undefined,
+    purchaseOrder: body.purchaseOrder as string,
     contactName: body.contactName as string,
     contactEmail: body.contactEmail as string,
     contactPhone: body.contactPhone as string,
@@ -114,7 +114,7 @@ export async function POST(request: Request) {
     row[COL.reviewedAt] = "";
     row[COL.closedAt] = "";
     row[COL.internalNotes] = "";
-    row[COL.purchaseOrder] = payload.purchaseOrder ?? "";
+    row[COL.purchaseOrder] = payload.purchaseOrder;
 
     const values = [row.map((v) => (v == null ? "" : String(v)))];
 

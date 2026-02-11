@@ -57,6 +57,7 @@ export default function Home() {
   const requiredFields = useMemo(
     () => ({
       jobName: "Job name is required.",
+      purchaseOrder: "Purchase order is required.",
       addressLine1: "Address line 1 is required.",
       contactName: "Field contact name is required.",
       contactEmail: "Field contact email is required.",
@@ -165,6 +166,8 @@ export default function Home() {
                 />
                 <Field
                   label="Purchase order"
+                  required
+                  error={errors.purchaseOrder}
                   input={
                     <input
                       type="text"
@@ -173,7 +176,7 @@ export default function Home() {
                       onChange={(e) =>
                         handleChange("purchaseOrder", e.target.value)
                       }
-                      placeholder="PO number (optional)"
+                      placeholder="PO number (Client PO or Acclaim PO accepted)"
                     />
                   }
                 />
