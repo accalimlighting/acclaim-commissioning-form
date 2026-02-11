@@ -19,7 +19,7 @@ type FormState = {
   programmingNarrative: string;
   fixturesOperable: "yes" | "no" | "";
   wiringNotes: string;
-  dmxAccessAvailable: boolean;
+  dmxAccessAvailable: boolean | "";
   additionalNotes: string;
 };
 
@@ -45,7 +45,7 @@ const initialState: FormState = {
   programmingNarrative: "",
   fixturesOperable: "",
   wiringNotes: "",
-  dmxAccessAvailable: false,
+  dmxAccessAvailable: "",
   additionalNotes: "",
 };
 
@@ -316,7 +316,7 @@ export default function Home() {
               <div className="space-y-4">
                 <Field
                   label="Drawing link (Drive, SharePoint, etc.)"
-                  helper="Include sheet with fixture types, layout, control zones."
+                  helper="Include sheet with fixture types, layout, control zones. Contruction documents can also be emailed if preferred"
                   input={
                     <input
                       type="url"
@@ -355,6 +355,7 @@ export default function Home() {
                 <Field
                   label="Are all fixtures correctly wired and operable?"
                   required
+                  helper="Contact Acclaim Support to resolve any issues at (323) 213-4594 or support@acclaimlighting.com"
                   error={errors.fixturesOperable}
                   input={
                     <div className="flex gap-4">
