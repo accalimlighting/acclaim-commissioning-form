@@ -80,7 +80,7 @@ export default function Home() {
     }
     if (
       form.contactPhone &&
-      !/^[+()\\d\\s-]{7,}$/.test(form.contactPhone.trim())
+      !/^[+()\d\s-]{7,}$/.test(form.contactPhone.trim())
     ) {
       nextErrors.contactPhone = "Enter a valid phone number.";
     }
