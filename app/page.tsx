@@ -355,7 +355,24 @@ export default function Home() {
                 <Field
                   label="Are all fixtures correctly wired and operable?"
                   required
-                  helper="Contact Acclaim Support to resolve any issues at (323) 213-4594 or support@acclaimlighting.com"
+                  helper={
+                    <>
+                      Contact Acclaim Support to resolve any issues at{" "}
+                      <a
+                        href="tel:+13232134594"
+                        className="underline underline-offset-2 hover:text-slate-900"
+                      >
+                        (323) 213-4594
+                      </a>{" "}
+                      or{" "}
+                      <a
+                        href="mailto:support@acclaimlighting.com"
+                        className="underline underline-offset-2 hover:text-slate-900"
+                      >
+                        support@acclaimlighting.com
+                      </a>
+                    </>
+                  }
                   error={errors.fixturesOperable}
                   input={
                     <div className="flex gap-4">
@@ -566,7 +583,7 @@ function Section({ kicker, title, description, badge, children }: SectionProps) 
 type FieldProps = {
   label: string;
   input: React.ReactNode;
-  helper?: string;
+  helper?: React.ReactNode;
   required?: boolean;
   error?: string;
 };
