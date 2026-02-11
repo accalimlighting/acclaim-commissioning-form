@@ -1,5 +1,11 @@
-import { google } from "googleapis";
 import { NextResponse } from "next/server";
+import {
+  COL,
+  DEFAULT_STATUS,
+  type SubmissionStatus,
+} from "@/lib/sheet-schema";
+import { checkRateLimit } from "@/lib/rate-limit";
+import { getSheetsClient } from "@/lib/sheets-client";
 
 type Payload = {
   jobName: string;
@@ -14,21 +20,6 @@ type Payload = {
   dmxAccessAvailable?: boolean;
   additionalNotes?: string;
 };
-
-const REQUIRED_ENV = [
-  "GOOGLE_SERVICE_ACCOUNT_EMAIL",
-  "GOOGLE_SERVICE_ACCOUNT_KEY",
-  "GOOGLE_SHEETS_ID",
-];
-
-const SCOPE = ["https://www.googleapis.com/auth/spreadsheets"];
-
-function validateEnv() {
-  const missing = REQUIRED_ENV.filter((key) => !process.env[key]);
-  if (missing.length) {
-    throw new Error(`Missing environment variables: ${missing.join(", ")}`);
-  }
-}
 
 function parsePayload(data: unknown): Payload {
   const body = data as Record<string, unknown>;
@@ -76,68 +67,66 @@ function parsePayload(data: unknown): Payload {
   };
 }
 
-function getSheetsClient() {
-  validateEnv();
-
-  const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL!;
-  const privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_KEY!.replace(
-    /\\n/g,
-    "\n"
-  );
-  const sheetsId = process.env.GOOGLE_SHEETS_ID!;
-
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: clientEmail,
-      private_key: privateKey,
-    },
-    scopes: SCOPE,
-  });
-
-  const sheets = google.sheets({
-    version: "v4",
-    auth,
-  });
-
-  return { sheets, sheetsId };
+function getClientId(request: Request): string {
+  const forwarded = request.headers.get("x-forwarded-for");
+  const real = request.headers.get("x-real-ip");
+  if (forwarded) return forwarded.split(",")[0].trim();
+  if (real) return real;
+  return "unknown";
 }
 
 export async function POST(request: Request) {
+  const clientId = getClientId(request);
+  if (!checkRateLimit(clientId)) {
+    return NextResponse.json(
+      { error: "Too many submissions. Try again later." },
+      { status: 429 }
+    );
+  }
   try {
     const body = await request.json();
     const payload = parsePayload(body);
     const { sheets, sheetsId } = getSheetsClient();
 
+    const submissionId = crypto.randomUUID();
     const timestamp = new Date().toISOString();
-    const row = [
-      timestamp,
-      payload.jobName,
-      payload.siteAddress,
-      payload.contactName,
-      payload.contactEmail,
-      payload.contactPhone,
-      payload.drawingLink || "",
-      payload.programmingNarrative || "",
-      payload.fixturesOperable === "yes" ? "Yes" : "No",
-      payload.wiringNotes || "",
-      payload.dmxAccessAvailable ? "Yes" : "No",
-      payload.additionalNotes || "",
-    ];
+    const status: SubmissionStatus = DEFAULT_STATUS;
+
+    const row: (string | number)[] = [];
+    row[COL.submissionId] = submissionId;
+    row[COL.timestamp] = timestamp;
+    row[COL.jobName] = payload.jobName;
+    row[COL.siteAddress] = payload.siteAddress;
+    row[COL.contactName] = payload.contactName;
+    row[COL.contactEmail] = payload.contactEmail;
+    row[COL.contactPhone] = payload.contactPhone;
+    row[COL.drawingLink] = payload.drawingLink ?? "";
+    row[COL.programmingNarrative] = payload.programmingNarrative ?? "";
+    row[COL.fixturesOperable] = payload.fixturesOperable === "yes" ? "Yes" : "No";
+    row[COL.wiringNotes] = payload.wiringNotes ?? "";
+    row[COL.dmxAccessAvailable] = payload.dmxAccessAvailable ? "Yes" : "No";
+    row[COL.additionalNotes] = payload.additionalNotes ?? "";
+    row[COL.status] = status;
+    row[COL.reviewedBy] = "";
+    row[COL.reviewedAt] = "";
+    row[COL.closedAt] = "";
+    row[COL.internalNotes] = "";
+
+    const values = [row.map((v) => (v == null ? "" : String(v)))];
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: sheetsId,
       range: "Sheet1!A1",
       valueInputOption: "USER_ENTERED",
       requestBody: {
-        values: [row],
+        values,
       },
     });
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, submissionId });
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Unknown error occurred";
     return NextResponse.json({ error: message }, { status: 400 });
   }
 }
-
