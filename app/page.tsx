@@ -354,7 +354,6 @@ export default function Home() {
               <div className="space-y-4">
                 <Field
                   label="Are all fixtures correctly wired and operable?"
-                  required
                   helper={
                     <>
                       Contact Acclaim Support to resolve any issues at{" "}
