@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
 
     const res = await sheets.spreadsheets.values.get({
       spreadsheetId: sheetsId,
-      range: "Sheet1!A:S",
+      range: "Sheet1!A:U",
     });
 
     const rows = (res.data.values ?? []) as unknown[][];

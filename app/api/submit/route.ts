@@ -115,6 +115,8 @@ export async function POST(request: Request) {
     row[COL.closedAt] = "";
     row[COL.internalNotes] = "";
     row[COL.purchaseOrder] = payload.purchaseOrder;
+    row[COL.scheduledOn] = "";
+    row[COL.completedOn] = "";
 
     const values = [row.map((v) => (v == null ? "" : String(v)))];
 

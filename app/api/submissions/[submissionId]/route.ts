@@ -53,7 +53,7 @@ export async function PATCH(
 
     const res = await sheets.spreadsheets.values.get({
       spreadsheetId: sheetsId,
-      range: "Sheet1!A:S",
+      range: "Sheet1!A:U",
     });
 
     const rows = (res.data.values ?? []) as unknown[][];
@@ -89,7 +89,7 @@ export async function PATCH(
     const now = new Date().toISOString();
     const updated: string[] = [...dataRows[rowIndex].map((c) => (c != null ? String(c) : ""))];
 
-    while (updated.length <= COL.purchaseOrder) {
+    while (updated.length <= COL.completedOn) {
       updated.push("");
     }
 
@@ -101,6 +101,7 @@ export async function PATCH(
       }
       if (body.status === "closed") {
         updated[COL.closedAt] = now;
+        updated[COL.completedOn] = now;
         if (body.reviewedBy != null) updated[COL.reviewedBy] = body.reviewedBy;
       }
     }
@@ -111,7 +112,7 @@ export async function PATCH(
       updated[COL.internalNotes] = body.internalNotes;
     }
 
-    const range = `Sheet1!A${sheetRowNumber}:S${sheetRowNumber}`;
+    const range = `Sheet1!A${sheetRowNumber}:U${sheetRowNumber}`;
     await sheets.spreadsheets.values.update({
       spreadsheetId: sheetsId,
       range,

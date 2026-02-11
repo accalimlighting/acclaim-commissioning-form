@@ -166,7 +166,6 @@ export default function Home() {
                 />
                 <Field
                   label="Purchase order"
-                  required
                   error={errors.purchaseOrder}
                   input={
                     <input

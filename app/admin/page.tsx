@@ -280,6 +280,12 @@ function DetailPanel({
           {submission.closedAt && (
             <DetailRow label="Closed at" value={new Date(submission.closedAt).toLocaleString()} />
           )}
+          {submission.scheduledOn && (
+            <DetailRow label="Scheduled on" value={submission.scheduledOn} />
+          )}
+          {submission.completedOn && (
+            <DetailRow label="Completed on" value={submission.completedOn} />
+          )}
 
           <div>
             <label className="mb-1 block text-sm font-medium text-slate-700">
