@@ -52,13 +52,13 @@ Follow these steps so the app can read and write submissions.
 
 ### 2. Add the header row
 
-- In **row 1**, enter these column headers **in order**, one per cell (A1, B1, C1, … through R1):
+- In **row 1**, enter these column headers **in order**, one per cell (A1, B1, C1, … through S1):
 
-  | A              | B         | C         | D             | E              | F               | G              | H             | I                        | J                   | K            | L                      | M                | N      | O            | P           | Q         | R              |
-  |----------------|-----------|-----------|---------------|----------------|-----------------|----------------|---------------|---------------------------|---------------------|--------------|-------------------------|------------------|--------|--------------|-------------|-----------|----------------|
-  | Submission ID  | Timestamp | Job name  | Site address  | Contact name   | Contact email   | Contact phone  | Drawing link  | Programming narrative     | Fixtures operable   | Wiring notes | DMX access available    | Additional notes | Status | Reviewed By  | Reviewed At | Closed At | Internal Notes |
+  | A              | B         | C         | D             | E              | F               | G              | H             | I                        | J                   | K            | L                      | M                | N      | O            | P           | Q         | R              | S              |
+  |----------------|-----------|-----------|---------------|----------------|-----------------|----------------|---------------|---------------------------|---------------------|--------------|-------------------------|------------------|--------|--------------|-------------|-----------|----------------|----------------|
+  | Submission ID  | Timestamp | Job name  | Site address  | Contact name   | Contact email   | Contact phone  | Drawing link  | Programming narrative     | Fixtures operable   | Wiring notes | DMX access available    | Additional notes | Status | Reviewed By  | Reviewed At | Closed At | Internal Notes | Purchase Order |
 
-- Or type each header in order: **A1** = Submission ID, **B1** = Timestamp, **C1** = Job name, **D1** = Site address, **E1** = Contact name, **F1** = Contact email, **G1** = Contact phone, **H1** = Drawing link, **I1** = Programming narrative, **J1** = Fixtures operable, **K1** = Wiring notes, **L1** = DMX access available, **M1** = Additional notes, **N1** = Status, **O1** = Reviewed By, **P1** = Reviewed At, **Q1** = Closed At, **R1** = Internal Notes.
+- Or type each header in order: **A1** = Submission ID, **B1** = Timestamp, **C1** = Job name, **D1** = Site address, **E1** = Contact name, **F1** = Contact email, **G1** = Contact phone, **H1** = Drawing link, **I1** = Programming narrative, **J1** = Fixtures operable, **K1** = Wiring notes, **L1** = DMX access available, **M1** = Additional notes, **N1** = Status, **O1** = Reviewed By, **P1** = Reviewed At, **Q1** = Closed At, **R1** = Internal Notes, **S1** = Purchase Order.
 
 - Leave **row 2 and below** empty for the app to append new submissions.
 
@@ -77,7 +77,7 @@ Follow these steps so the app can read and write submissions.
 
 ### 5. (Optional) You already have data in the old 12-column layout
 
-- Add 6 new columns to the **right** of your existing columns: **Submission ID**, **Status**, **Reviewed By**, **Reviewed At**, **Closed At**, **Internal Notes**.
+- Add 7 new columns to the **right** of your existing columns: **Submission ID**, **Status**, **Reviewed By**, **Reviewed At**, **Closed At**, **Internal Notes**, **Purchase Order**.
 - Optionally add the header row as in step 2 if you don’t have one. Existing data rows can stay as-is; the app will treat them as `status: new` and assign synthetic IDs when you use the admin panel.
 
 ---
@@ -106,8 +106,9 @@ Row 1 must be headers. Data starts at row 2. The app expects **Sheet1** with the
 | 16| Reviewed At      | ISO timestamp                        |
 | 17| Closed At        | ISO timestamp                        |
 | 18| Internal Notes   | Admin-only notes                     |
+| 19| Purchase Order   | Optional PO number                   |
 
-**Migration from old layout:** If you already have data without Submission ID / Status columns, add the new columns (Submission ID, then Status, Reviewed By, Reviewed At, Closed At, Internal Notes) to the right of "Additional notes". Existing rows will be read with `status: new` and a synthetic ID; new submissions will fill all columns.
+**Migration from old layout:** If you already have data without Submission ID / Status columns, add the new columns (Submission ID, then Status, Reviewed By, Reviewed At, Closed At, Internal Notes, Purchase Order) to the right of "Additional notes". Existing rows will be read with `status: new` and a synthetic ID; new submissions will fill all columns.
 
 ## Validation and rate limiting
 - **Submit payload:** Required and optional fields are validated in `app/api/submit/route.ts` before writing to Sheets (job name, site, contact, fixturesOperable, etc.).

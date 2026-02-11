@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 
 type FormState = {
   jobName: string;
+  purchaseOrder: string;
   addressLine1: string;
   addressLine2: string;
   city: string;
@@ -30,6 +31,7 @@ type Status =
 
 const initialState: FormState = {
   jobName: "",
+  purchaseOrder: "",
   addressLine1: "",
   addressLine2: "",
   city: "",
@@ -158,6 +160,20 @@ export default function Home() {
                       onChange={(e) => handleChange("jobName", e.target.value)}
                       placeholder="e.g., Riverfront Plaza"
                       autoComplete="organization"
+                    />
+                  }
+                />
+                <Field
+                  label="Purchase order"
+                  input={
+                    <input
+                      type="text"
+                      className="input"
+                      value={form.purchaseOrder}
+                      onChange={(e) =>
+                        handleChange("purchaseOrder", e.target.value)
+                      }
+                      placeholder="PO number (optional)"
                     />
                   }
                 />

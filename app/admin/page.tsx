@@ -263,6 +263,7 @@ function DetailPanel({
           <DetailRow label="Contact" value={submission.contactName} />
           <DetailRow label="Email" value={submission.contactEmail} />
           <DetailRow label="Phone" value={submission.contactPhone} />
+          <DetailRow label="Purchase order" value={submission.purchaseOrder} />
           <DetailRow label="Drawing link" value={submission.drawingLink} link />
           <DetailRow label="Programming narrative" value={submission.programmingNarrative} />
           <DetailRow label="Fixtures operable" value={submission.fixturesOperable} />

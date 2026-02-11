@@ -21,6 +21,7 @@
  * 15: Reviewed At (ISO)
  * 16: Closed At (ISO)
  * 17: Internal Notes
+ * 18: Purchase Order
  */
 
 export const SUBMISSION_STATUS = ["new", "reviewed", "closed"] as const;
@@ -45,6 +46,7 @@ export const SHEET_HEADERS = [
   "Reviewed At",
   "Closed At",
   "Internal Notes",
+  "Purchase Order",
 ] as const;
 
 export const COL = {
@@ -66,6 +68,7 @@ export const COL = {
   reviewedAt: 15,
   closedAt: 16,
   internalNotes: 17,
+  purchaseOrder: 18,
 } as const;
 
 export const DEFAULT_STATUS: SubmissionStatus = "new";
@@ -89,6 +92,7 @@ export interface SubmissionRow {
   reviewedAt: string;
   closedAt: string;
   internalNotes: string;
+  purchaseOrder: string;
 }
 
 /** Parse a raw row from Sheets (array of cell values) into SubmissionRow. */
@@ -117,5 +121,6 @@ export function rowToSubmission(row: unknown[], rowIndex: number): SubmissionRow
     reviewedAt: get(COL.reviewedAt),
     closedAt: get(COL.closedAt),
     internalNotes: get(COL.internalNotes),
+    purchaseOrder: get(COL.purchaseOrder),
   };
 }
